@@ -4,7 +4,7 @@
     "isTestChain": true,
     "contracts": {
         "entryPointV7": "0x0000000071727De22E5E9d8BAf0edAc6f37da032",
-        "klasterPaymasterV7": "0xab9b52A97fb334eFdB8FD081763952653040806F"
+        "klasterPaymasterV7": "0xE854C84cD68fC434cB3B0042c29235D452cAD977"
     },
     "price": {
         "chainId": "1",
