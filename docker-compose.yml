@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+    node:
+        image: bcnmy/mee-node:1.0.66
+        restart: on-failure
+        environment:
+          - KEY=<NODE_PRIV_KEY (0x...)>
+          - PORT=3000
+          - REDIS_HOST=redis
+          - REDIS_PORT=6379
+        ports:
+          - "3000:3000"
+        links:
+          - redis
+        volumes:
+          - ./logs:/logs
+          - ./keystore:/usr/src/app/keystore
+          - ./chains-testnet:/usr/src/app/chains
+    redis:
+        image: redis:alpine
+        restart: always
+        command: redis-server --dir /data --save 60 1 --appendonly yes --loglevel warning
+        volumes:
+          - ./redis-data:/data
+volumes:
+    keystore:
+    chains:
+    redis-data:
+    logs:
