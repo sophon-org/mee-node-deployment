@@ -10,7 +10,7 @@ IMPORTANT: Make sure to replace <YOUR-RPC-URL> placeholder in every chain config
 Once the funded key is provided & RPCs configured, run the
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 The MEE Node will boot up and expose endpoints at:
