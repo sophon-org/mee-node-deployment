@@ -2,10 +2,9 @@
     "name": "Ethereum",
     "rpc": "YOUR RPC URL (debug_traceCall enabled). ETH rpc is mandatory because price feeds are read from mainnet. If used for price feeds only - can be pulibc rpc.",
     "isTestChain": false,
-    "contracts": {
-        "entryPointV7": "0x0000000071727De22E5E9d8BAf0edAc6f37da032",
-        "klasterPaymasterV7": "0xE854C84cD68fC434cB3B0042c29235D452cAD977"
-    },
+    "chainId": "1",
+    "type": "evm",
+    "eip1559": true,
     "price": {
         "chainId": "1",
         "oracle": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"

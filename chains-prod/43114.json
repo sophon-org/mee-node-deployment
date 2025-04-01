@@ -1,39 +1,39 @@
 {
-    "name": "Polygon",
+    "name": "Avalanche C-Chain",
     "rpc": "<YOUR RPC URL (debug_traceCall enabled)>",
     "isTestChain": false,
-    "chainId": "137",
+    "chainId": "43114",
     "type": "evm",
     "eip1559": true,
     "price": {
         "chainId": "1",
-        "oracle": "0x7bAC85A8a13A4BcD8abb3eB7d6b4d632c5a57676"
+        "oracle": "0xFF3EEb22B5E3dE6e705b44749C2559d704923FD7"
     },
-    "handleOpsDeposit": "10",
+    "handleOpsDeposit": "0.1",
     "paymentTokens": [
         {
-            "name": "MATIC",
+            "name": "AVAX",
             "address": "0x0000000000000000000000000000000000000000",
-            "symbol": "MATIC",
+            "symbol": "AVAX",
             "decimals": 18,
             "price": {
                 "chainId": "1",
-                "oracle": "0x7bAC85A8a13A4BcD8abb3eB7d6b4d632c5a57676"
+                "oracle": "0xFF3EEb22B5E3dE6e705b44749C2559d704923FD7"
             }
         },
         {
-            "name": "Wrapped Matic",
-            "address": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
-            "symbol": "WMATIC",
+            "name": "Wrapped AVAX",
+            "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+            "symbol": "WAVAX",
             "decimals": 18,
             "price": {
                 "chainId": "1",
-                "oracle": "0x7bAC85A8a13A4BcD8abb3eB7d6b4d632c5a57676"
+                "oracle": "0xFF3EEb22B5E3dE6e705b44749C2559d704923FD7"
             }
         },
         {
             "name": "ChainLink Token",
-            "address": "0xb0897686c545045aFc77CF20eC7A532E3120E0F1",
+            "address": "0x5947BB275c521040051D82396192181b413227A3",
             "symbol": "LINK",
             "decimals": 18,
             "price": {
@@ -42,40 +42,39 @@
             }
         },
         {
-            "name": "USDC",
-            "address": "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+            "name": "USD Coin",
+            "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
             "symbol": "USDC",
             "decimals": 6,
             "price": {
                 "value": "1",
                 "decimals": "0"
-            },
-            "permitEnabled": true
+            }
         },
         {
             "name": "USDC (Bridged)",
-            "address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+            "address": "0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664",
             "symbol": "USDC",
             "decimals": 6,
             "price": {
                 "value": "1",
                 "decimals": "0"
-            },
-            "permitEnabled": true
-        },
-        {
-            "name": "Staked Matic",
-            "address": "0x3a58a54c066fdc0f2d55fc9c89f0415c92ebf3c4",
-            "symbol": "stMATIC",
-            "decimals": 18,
-            "price": {
-                "chainId": "1",
-                "oracle": "0x7bAC85A8a13A4BcD8abb3eB7d6b4d632c5a57676"
             }
         },
         {
             "name": "Tether USD",
-            "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+            "address": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
+            "symbol": "USDT",
+            "decimals": 6,
+            "price": {
+                "value": "1",
+                "decimals": "0"
+            },
+            "permitEnabled": true
+        },
+        {
+            "name": "USDT (Bridged)",
+            "address": "0xc7198437980c041c805A1EDcbA50c1Ce5db95118",
             "symbol": "USDT",
             "decimals": 6,
             "price": {

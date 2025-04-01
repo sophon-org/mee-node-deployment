@@ -1,22 +1,171 @@
-# MEE Local Node
+# Mee Node Deployment Guide
 
-To start MEE local node, provide the configuration for the node in the docker-compose file. At least the `KEY` field
-should be provided (private key) of a sufficiently funded wallet which is going to be configured as the node operator.
+This repository contains the necessary configuration files to deploy and run a Mee Node. This guide will walk you through the setup process and provide information about node maintenance.
 
-The node reads chain config from the mapped `chains` folder. In the example docker-compose file, chains-testnet folder is being provided to the node.
+## Prerequisites
 
-IMPORTANT: Make sure to replace <YOUR-RPC-URL> placeholder in every chain config json descriptor from the chains folder before spinning up the node. RPCs are supposed to be able to run the ```debug_traceCall``` operation - if you're using 3rd party RPCs, this is something you'd have to make sure is exposed to you by the RPC provider.
+- Docker and Docker Compose installed
+- Access to RPC endpoints for the chains you want to support
+- Sufficient funds in native tokens for the supported chains
 
-Once the funded key is provided & RPCs configured, run the
+## Setting Up a Node
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/bcnmy/mee-node-deployment
+cd mee-node-deployment
+```
+
+### 2. Configure Chain RPC URLs
+
+1. Navigate to the appropriate chains folder:
+   - `chains-prod/` for mainnet networks
+   - `chains-testnet/` for testnet networks
+
+2. For each chain you want to support, create a JSON file with the RPC configuration.
+
+> **Note**: For mainnet node operators, it's recommended to support all 9 mainnet networks from the `chains-prod` folder.
+
+### 3. Configure Docker Compose
+
+1. Open `docker-compose.yml` and ensure the volumes section points to your chosen chains folder:
+   ```yaml
+   volumes:
+     - ./chains-testnet:/app/chains  # Change to chains-prod for mainnet
+   ```
+
+2. You can support both mainnet and testnet by adding JSON files to the loaded chains folder.
+
+### 4. Set Up Environment Variables
+
+Create a `.env` file with the following minimum configuration:
+
+```env
+KEY=<your-private-key>
+PORT=3000
+REDIS_HOST=redis
+REDIS_PORT=6379
+```
+
+> **Note**: If you're using your own Redis instance, update `REDIS_HOST` and `REDIS_PORT` accordingly.
+
+### 5. Fund Your Node
+
+Ensure your node's private key address is funded with sufficient native tokens on all supported chains. Recommended minimum funding:
+
+| Chain | Minimum Native Token |
+|-------|---------------------|
+| ETH-based chains | 0.05 ETH |
+| Gnosis Chain | 100 xDAI |
+| BSC | 0.17 BNB |
+| Sonic Chain | 50 S |
+| Polygon | 500 POL |
+| Avax C-Chain | 5 AVAX |
+
+### 6. Start the Node
 
 ```bash
 docker compose up -d
 ```
 
-The MEE Node will boot up and expose endpoints at:
+Upon successful startup, you should see logs indicating:
+- Node initialization
+- Chain health checks
+- Simulator status
 
-`http://localhost:3000/`.
+## Additional Configuration Options
 
-To see the docs navigate to:
+The following environment variables can be added to your `.env` file for additional configuration:
 
-`http://localhost:3000/docs`.
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `FEE_BENEFICIARY` | Address that collects node fees | Node's private key address |
+| `FEE_PERCENTAGE` | Percentage added to gas fees | 10 |
+| `GATEWAY_URL` | Biconomy Network URL | Required for mainnet |
+| `ENV_ENC_PASSWORD` | Password for encrypted key file | - |
+| `USEROP_MIN_EXEC_WINDOW_DURATION` | Minimum execution window (seconds) | 180 |
+| `USEROP_MAX_EXEC_WINDOW_DURATION` | Maximum execution window (seconds) | 600 |
+| `USEROP_MAX_WAIT_BEFORE_EXEC_START` | Maximum future execution time (seconds) | 300 |
+| `USEROP_TRACE_CALL_SIMULATION_POLL_INTERVAL` | Simulation check interval (seconds) | 2 |
+| `USEROP_SAFE_WINDOW_BEFORE_EXEC_END` | Early execution threshold (seconds) | 30 |
+| `MAX_CALLDATA_GAS_LIMIT` | Maximum calldata gas limit | 330000001 |
+
+## Loading Encrypted Private Key
+
+Instead of providing the raw private key, you can use an encrypted key file:
+
+1. Install the ChainLink env-enc package:
+   ```bash
+   npm install -g @chainlink/env-enc
+   ```
+
+2. Generate encrypted key:
+   ```bash
+   npx env-enc set-pw
+   npx env-enc set
+   ```
+   When prompted, enter "KEY" as the variable name and your private key as the value.
+
+3. Rename the generated file to `key.enc` and place it in the `./keystore` folder.
+
+4. In your `.env` file, replace the `KEY` variable with:
+   ```env
+   ENV_ENC_PASSWORD=<your-encryption-password>
+   ```
+
+## Node Maintenance
+
+### Monitoring Node Health
+
+1. Check the node status endpoint:
+   ```
+   http://localhost:3000/v3/info
+   ```
+
+2. Monitor chain health status in the response. A healthy chain status looks like:
+   ```json
+   {
+     "chainId": "11155420",
+     "name": "OP Sepolia",
+     "healthCheck": {
+       "rpcOperational": true,
+       "debugTraceCallSupported": true,
+       "nativeBalance": "528841195784636675",
+       "nonce": 5055,
+       "execQueueActiveJobs": 0,
+       "execQueuePendingJobs": 0,
+       "lastChecked": 1743538429111,
+       "status": "healthy"
+     }
+   }
+   ```
+
+### Balance Management
+
+1. Regularly monitor native token balances across all supported chains
+2. Swap earned ERC20 tokens for native tokens when needed
+3. Maintain sufficient funding for gas fees
+
+### Troubleshooting
+
+If a chain shows unhealthy status:
+```json
+{
+  "chainId": "421614",
+  "name": "Arbitrum Sepolia",
+  "healthCheck": {
+    "status": "not-healthy",
+    "reason": "native coin balance too low"
+  }
+}
+```
+
+Take appropriate action based on the reported reason:
+- Add more native tokens if balance is low
+- Check RPC connectivity if RPC is not operational
+- Review execution queue if jobs are stuck
+
+## Support
+
+For additional support or questions, please refer to the project documentation or contact the development team.

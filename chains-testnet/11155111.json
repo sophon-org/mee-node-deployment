@@ -2,15 +2,14 @@
     "name": "Sepolia",
     "rpc": "<YOUR RPC URL (debug_traceCall enabled)>",
     "isTestChain": true,
-    "contracts": {
-        "entryPointV7": "0x0000000071727De22E5E9d8BAf0edAc6f37da032",
-        "klasterPaymasterV7": "0xE854C84cD68fC434cB3B0042c29235D452cAD977"
-    },
+    "chainId": "11155111",
+    "type": "evm",
+    "eip1559": true,
     "price": {
         "chainId": "1",
         "oracle": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
     },
-    "handleOpsDeposit": "1",
+    "handleOpsDeposit": "0.025",
     "paymentTokens": [
         {
             "name": "ETH",
@@ -23,15 +22,35 @@
             }
         },
         {
+            "name": "Wrapped Ether",
+            "address": "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
+            "symbol": "WETH",
+            "decimals": 18,
+            "price": {
+                "chainId": "1",
+                "oracle": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
+            }
+        },
+        {
             "name": "USD Coin",
             "address": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
             "symbol": "USDC",
             "decimals": 6,
             "price": {
-                "chainId": "1",
-                "oracle": "0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6"
+                "value": "1",
+                "decimals": "0"
             },
             "permitEnabled": true
+        },
+        {
+            "name": "ChainLink Token",
+            "address": "0x779877A7B0D9E8603169DdbD7836e478b4624789",
+            "symbol": "LINK",
+            "decimals": 18,
+            "price": {
+                "chainId": "1",
+                "oracle": "0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c"
+            }
         }
     ]
 }
