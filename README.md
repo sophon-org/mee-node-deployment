@@ -39,14 +39,36 @@ cd mee-node-deployment
 
 ### 4. Set Up Environment Variables
 
-Create a `.env` file with the following minimum configuration:
+You can provide environment variables in two ways:
 
-```env
-KEY=<your-private-key>
-PORT=3000
-REDIS_HOST=redis
-REDIS_PORT=6379
-```
+1. Create a `.env` file with the following minimum configuration:
+   ```env
+   KEY=<your-private-key>
+   PORT=3000
+   REDIS_HOST=redis
+   REDIS_PORT=6379
+   ```
+   
+   To use the `.env` file, run Docker Compose with the `--env-file` flag:
+   ```bash
+   docker compose --env-file .env up -d
+   ```
+   Or you can add the `env_file` directive to your `docker-compose.yml`:
+   ```yaml
+   services:
+     node:
+       env_file:
+         - .env
+   ```
+
+2. Or provide them directly in the `docker-compose.yml` file as shown in the example:
+   ```yaml
+   environment:
+     - KEY=<your-private-key>
+     - PORT=3000
+     - REDIS_HOST=redis
+     - REDIS_PORT=6379
+   ```
 
 > **Note**: If you're using your own Redis instance, update `REDIS_HOST` and `REDIS_PORT` accordingly.
 
@@ -90,6 +112,7 @@ The following environment variables can be added to your `.env` file for additio
 | `USEROP_TRACE_CALL_SIMULATION_POLL_INTERVAL` | Simulation check interval (seconds) | 2 |
 | `USEROP_SAFE_WINDOW_BEFORE_EXEC_END` | Early execution threshold (seconds) | 30 |
 | `MAX_CALLDATA_GAS_LIMIT` | Maximum calldata gas limit | 330000001 |
+| `HEALTH_CHECK_INTERVAL` | How often the node performs chain health checks (seconds) | 300 |
 
 ## Loading Encrypted Private Key
 
