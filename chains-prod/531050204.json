@@ -1,0 +1,14 @@
+{
+    "name": "sophon-testnet",
+    "rpc": "https://zksync-os-testnet-sophon.zksync.dev/",
+    "isTestChain": false,
+    "chainId": "531050204",
+    "type": "evm",
+    "eip1559": true,
+    "price": {
+        "chainId": "531050204",
+        "oracle": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
+    },
+    "handleOpsDeposit": "0.025",
+    "paymentTokens": []
+}
