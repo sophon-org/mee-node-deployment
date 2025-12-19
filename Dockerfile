@@ -1,4 +1,14 @@
+# Use the official MEE node image
 FROM bcnmy/mee-node:1.1.94
-USER root
-RUN mkdir -p /usr/src/app/chains && rm -f /usr/src/app/chains/*.json
-COPY chains-testnet/531050204.json /usr/src/app/chains/531050204.json
+
+# Create expected dirs (optional but nice)
+RUN mkdir -p /usr/src/app/chains /usr/src/app/logs /usr/src/app/keystore
+
+# Copy your chain configs into the image
+# (this replaces the bind-mount ./chains-testnet:/usr/src/app/chains)
+COPY ./chains-testnet/ /usr/src/app/chains/
+
+# Expose the port the app listens on
+EXPOSE 3000
+
+# The base image already has the correct CMD/ENTRYPOINT
