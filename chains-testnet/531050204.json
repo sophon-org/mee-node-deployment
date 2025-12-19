@@ -1,14 +1,17 @@
 {
-    "name": "sophon-testnet",
-    "rpc": "https://zksync-os-testnet-sophon.zksync.dev/",
-    "isTestChain": true,
-    "chainId": "531050204",
-    "type": "evm",
-    "eip1559": true,
-    "price": {
-        "chainId": "531050204",
-        "oracle": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
-    },
-    "handleOpsDeposit": "0.00000025",
-    "paymentTokens": []
+  "name": "sophon-testnet",
+  "rpc": "https://zksync-os-testnet-sophon.zksync.dev/",
+  "isTestChain": true,
+  "chainId": "531050204",
+  "type": "evm",
+  "eip1559": true,
+  "handleOpsDeposit": "0.00000025",
+  "paymentTokens": [
+    {
+      "name": "SOPH",
+      "address": "0x0000000000000000000000000000000000000000",
+      "symbol": "SOPH",
+      "decimals": 18
+    }
+  ]
 }
