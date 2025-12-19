@@ -7,7 +7,7 @@
   "eip1559": true,
 
   "price": {
-    "chainId": 1,
+    "chainId": "531050204",
     "oracle": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
   },
 
