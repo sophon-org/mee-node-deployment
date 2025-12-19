@@ -5,12 +5,18 @@
   "chainId": "531050204",
   "type": "evm",
   "eip1559": true,
+
+  "price": {
+    "chainId": 1,
+    "oracle": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
+  },
+
   "handleOpsDeposit": "0.00000025",
   "paymentTokens": [
     {
-      "name": "SOPH",
+      "name": "ETH",
       "address": "0x0000000000000000000000000000000000000000",
-      "symbol": "SOPH",
+      "symbol": "ETH",
       "decimals": 18
     }
   ]
